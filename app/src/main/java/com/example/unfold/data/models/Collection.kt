@@ -15,7 +15,7 @@ val collectionMock = Collection(
     "WOMAN PARADE",
     "A powerful collection of powerful images",
     11,
-    photoMock,
-    mockUser,
+    Photo.Mock,
+    User.Mock,
     listOf(Tag("man"), Tag("drinking"), Tag("coffee")),
 )

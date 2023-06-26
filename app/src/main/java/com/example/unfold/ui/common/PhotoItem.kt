@@ -11,30 +11,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.unfold.data.models.Photo
-import com.example.unfold.data.models.photoMock
 import com.example.unfold.ui.theme.UnfoldTheme
 import com.example.unfold.util.ThemedPreview
 
 @Composable
-fun PhotoItem(photo: Photo, onTap: ((String) -> Unit)? = null) {
+fun PhotoItem(photo: Photo, onLike: () -> Unit, onClick: ((String) -> Unit)? = null) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(enabled = onTap != null) { onTap?.invoke(photo.id) },
+            .clickable(enabled = onClick != null) { onClick?.invoke(photo.id) },
         contentAlignment = Alignment.BottomCenter,
     ) {
-        AsyncImage(
-            model = photo.urls.regular,
-            contentDescription = null,
-            placeholder = photo.blurBitmap?.asImageBitmap()?.let { BitmapPainter(it) },
-            contentScale = ContentScale.FillWidth,
-        )
+        AsyncPhoto(model = photo)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -46,6 +36,7 @@ fun PhotoItem(photo: Photo, onTap: ((String) -> Unit)? = null) {
             LikesItem(
                 likesCount = photo.likes,
                 liked = photo.likedByUser,
+                onClick = onLike,
             )
         }
     }
@@ -56,7 +47,7 @@ fun PhotoItem(photo: Photo, onTap: ((String) -> Unit)? = null) {
 fun PhotoItemPreview() {
     UnfoldTheme {
         Surface(color = Color.Gray) {
-            PhotoItem(photoMock) {}
+            PhotoItem(Photo.Mock, { })
         }
     }
 }

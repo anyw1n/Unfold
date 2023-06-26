@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.unfold.data.models.User
-import com.example.unfold.data.models.mockUser
 import com.example.unfold.ui.theme.UnfoldTheme
 import com.example.unfold.util.ThemedPreview
 
@@ -60,7 +59,7 @@ fun UserItem(user: User) {
 fun UserItemPreview() {
     UnfoldTheme {
         Surface(color = Color.Gray) {
-            UserItem(mockUser)
+            UserItem(User.Mock)
         }
     }
 }

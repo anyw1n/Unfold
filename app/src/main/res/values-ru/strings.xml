@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_first">Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!</string>
+    <string name="onboarding_second">Делитесь с друзьями, собирайте коллекции</string>
+    <string name="onboarding_third">Загружайте любимые снимки и отслеживайте статистику</string>
+    <string name="login_with_unsplash">ВОЙТИ ЧЕРЕЗ UNSPLASH</string>
+    <string name="retry">ПОВТОРИТЬ</string>
+    <string name="ribbon">ЛЕНТА</string>
+    <string name="photo">ФОТО</string>
+    <string name="collections">КОЛЛЕКЦИИ</string>
+    <string name="profile">ПРОФИЛЬ</string>
+    <string name="top_today">СЕГОДНЯ В ТОПЕ</string>
+    <string name="photos">" ФОТОГРАФИЙ"</string>
+    <string name="no_items_found">Ничего не найдено</string>
+    <string name="download">Скачать</string>
+    <string name="share">Поделиться</string>
+    <string name="photo_downloaded">Фото загружено</string>
+    <string name="x_photos">\nфотографии</string>
+    <string name="x_liked">\nпонравилось</string>
+    <string name="x_collections">\nколлекции</string>
+    <string name="logout_message">Вы уверены, что хотите выйти? Все локальные данные будут удалены.</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+</resources>

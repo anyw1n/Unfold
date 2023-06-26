@@ -64,7 +64,7 @@ fun LoginScreen(login: () -> Unit) {
             onClick = login,
         ) {
             Text(
-                text = stringResource(R.string.login_by_unsplash),
+                text = stringResource(R.string.login_with_unsplash),
                 fontWeight = FontWeight.Black,
             )
         }

@@ -1,5 +1,6 @@
 package com.example.unfold.ui.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,7 +23,7 @@ import com.example.unfold.ui.theme.UnfoldTheme
 import com.example.unfold.util.ThemedPreview
 
 @Composable
-fun LikesItem(likesCount: Int, liked: Boolean) {
+fun LikesItem(likesCount: Int, liked: Boolean, onClick: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = likesCount.toString(),
@@ -41,7 +42,8 @@ fun LikesItem(likesCount: Int, liked: Boolean) {
             tint = if (liked) Palette.HeartRed else if (isSystemInDarkTheme()) MaterialTheme.colorScheme.background else Color.White,
             modifier = Modifier
                 .size(20.dp)
-                .padding(start = 4.dp),
+                .padding(start = 4.dp)
+                .clickable { onClick() },
         )
     }
 }
@@ -52,8 +54,8 @@ fun LikesItemPreview() {
     UnfoldTheme {
         Surface(color = Color.Gray) {
             Column {
-                LikesItem(123, false)
-                LikesItem(13, true)
+                LikesItem(123, false) {}
+                LikesItem(13, true) {}
             }
         }
     }

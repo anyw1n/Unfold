@@ -1,5 +1,6 @@
 package com.example.unfold.ui.common
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +26,7 @@ import com.example.unfold.ui.MainDestinations
 import com.example.unfold.ui.theme.Palette
 
 @Composable
-fun AppBar(navController: NavController, title: String) {
+fun AppBar(navController: NavController, title: String, logout: () -> Unit) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: return
 
@@ -49,15 +50,11 @@ fun AppBar(navController: NavController, title: String) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
             )
-            if (currentRoute == HomeTabs.Ribbon.route) {
+            if (currentRoute == HomeTabs.Profile.route) {
                 Icon(
-                    modifier = Modifier.size(18.dp),
-                    painter = painterResource(R.drawable.search),
-                    contentDescription = null,
-                )
-            } else if (currentRoute == HomeTabs.Profile.route) {
-                Icon(
-                    modifier = Modifier.size(18.dp),
+                    modifier = Modifier
+                        .size(18.dp)
+                        .clickable { logout() },
                     painter = painterResource(R.drawable.logout),
                     contentDescription = null,
                 )

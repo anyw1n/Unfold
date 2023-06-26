@@ -1,13 +1,24 @@
 <resources>
-    <string name="app_name">Unfold</string>
-    <string name="onboarding_first">Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!</string>
-    <string name="onboarding_second">Делитесь с друзьями, собирайте коллекции</string>
-    <string name="onboarding_third">Загружайте любимые снимки и отслеживайте статистику</string>
-    <string name="login_by_unsplash">ВОЙТИ ЧЕРЕЗ UNSPLASH</string>
-    <string name="retry">ПОВТОРИТЬ</string>
-    <string name="ribbon">ЛЕНТА</string>
-    <string name="photo">ФОТО</string>
-    <string name="collections">КОЛЛЕКЦИИ</string>
-    <string name="profile">ПРОФИЛЬ</string>
-    <string name="top_today">СЕГОДНЯ В ТОПЕ</string>
+    <string name="app_name" translatable="false">Unfold</string>
+    <string name="onboarding_first">Take pictures, post, build an audience, get feedback!</string>
+    <string name="onboarding_second">Share with friends, collect collections</string>
+    <string name="onboarding_third">Upload your favorite shots and track statistics</string>
+    <string name="login_with_unsplash">LOGIN WITH UNSPLASH</string>
+    <string name="retry">RETRY</string>
+    <string name="ribbon">PHOTOS</string>
+    <string name="photo">PHOTO</string>
+    <string name="collections">COLLECTIONS</string>
+    <string name="profile">PROFILE</string>
+    <string name="top_today">TOP TODAY</string>
+    <string name="photos">" PHOTOS"</string>
+    <string name="no_items_found">No items found</string>
+    <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="photo_downloaded">Photo downloaded</string>
+    <string name="x_photos">"\nphotos"</string>
+    <string name="x_liked">\nliked</string>
+    <string name="x_collections">\ncollections</string>
+    <string name="logout_message">Are you sure you want to logout? All local data will be deleted.</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

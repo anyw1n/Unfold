@@ -1,6 +1,7 @@
 package com.example.unfold.data
 
 import android.net.Uri
+import androidx.core.net.toUri
 import com.example.unfold.data.models.AuthInfo
 import com.example.unfold.data.models.Collection
 import com.example.unfold.data.models.Photo
@@ -29,7 +30,11 @@ interface Api {
     suspend fun getMe(): User
 
     @GET("users/{username}/likes")
-    suspend fun getLikedPhotos(@Query("page") page: Int, @Query("per_page") limit: Int): List<Photo>
+    suspend fun getLikedPhotos(
+        @Path("username") username: String,
+        @Query("page") page: Int,
+        @Query("per_page") limit: Int,
+    ): List<Photo>
 
     @GET("photos")
     suspend fun getPhotos(@Query("page") page: Int, @Query("per_page") limit: Int): List<Photo>
@@ -38,13 +43,13 @@ interface Api {
     suspend fun getPhoto(@Path("id") id: String): Photo
 
     @POST("photos/{id}/like")
-    suspend fun likePhoto(@Path("id") id: String): String
+    suspend fun likePhoto(@Path("id") id: String)
 
     @DELETE("photos/{id}/like")
-    suspend fun unlikePhoto(@Path("id") id: String): String
+    suspend fun unlikePhoto(@Path("id") id: String)
 
     @GET("photos/{id}/download")
-    suspend fun downloadPhoto(@Path("id") id: String): String
+    suspend fun downloadPhoto(@Path("id") id: String)
 
     @GET("collections")
     suspend fun getCollections(@Query("page") page: Int, @Query("per_page") limit: Int): List<Collection>
@@ -53,7 +58,11 @@ interface Api {
     suspend fun getCollection(@Path("id") id: String): Collection
 
     @GET("collections/{id}/photos")
-    suspend fun getCollectionPhotos(@Query("page") page: Int, @Query("per_page") limit: Int): List<Photo>
+    suspend fun getCollectionPhotos(
+        @Path("id") id: String,
+        @Query("page") page: Int,
+        @Query("per_page") limit: Int,
+    ): List<Photo>
 
     companion object {
 
@@ -63,13 +72,13 @@ interface Api {
         private const val BaseUrl = "https://api.unsplash.com/"
         const val ClientId = "4xwZcrsEMKPIcqZDdStM9i3jRnSE0czu_FTmy0L9pjs"
         const val ClientSecret = "QJREJKVqoJ9vfp171JoSvzc3fSWgp6zmHxn-EVwBJWU"
-        val OAuthUri: Uri = Uri.parse(
+        val OAuthUri: Uri = (
             "https://unsplash.com/oauth/authorize" +
                 "?client_id=$ClientId" +
                 "&redirect_uri=$RedirectUri" +
                 "&response_type=code" +
-                "&scope=public+read_user+write_likes",
-        )
+                "&scope=public+read_user+write_likes"
+            ).toUri()
 
         fun create(credentialsRepository: CredentialsRepository) = Retrofit.Builder().run {
             baseUrl(BaseUrl)

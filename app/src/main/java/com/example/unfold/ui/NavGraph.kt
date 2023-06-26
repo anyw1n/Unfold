@@ -7,10 +7,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.example.unfold.R
@@ -69,12 +67,21 @@ fun NavGraph(
             composable(route = HomeTabs.Ribbon.route) {
                 val title = stringResource(R.string.ribbon)
                 LaunchedEffect(Unit) { setTitle(title) }
-                RibbonScreen { navController.navigate(RibbonRoutes.PhotoRoute + "/$it") }
+                RibbonScreen(showSnackbar) {
+                    navController.navigate(RibbonRoutes.PhotoRoute + "/$it")
+                }
             }
-            composable(route = RibbonRoutes.PhotoRoute + "/{${RibbonRoutes.PhotoId}}") {
+            composable(
+                route = RibbonRoutes.PhotoRoute + "/{${RibbonRoutes.PhotoId}}",
+                deepLinks = listOf(
+                    navDeepLink {
+                        uriPattern = "https://unsplash.com/photos/{${RibbonRoutes.PhotoId}}"
+                    },
+                ),
+            ) {
                 val title = stringResource(R.string.photo)
                 LaunchedEffect(Unit) { setTitle(title) }
-                PhotoScreen()
+                PhotoScreen(showSnackbar)
             }
             composable(route = HomeTabs.Collections.route) {
                 val title = stringResource(R.string.collections)
@@ -85,16 +92,17 @@ fun NavGraph(
             }
             composable(
                 route = CollectionsRoutes.CollectionRoute + "/{${CollectionsRoutes.CollectionId}}",
-                arguments = listOf(
-                    navArgument(CollectionsRoutes.CollectionId) { type = NavType.IntType },
-                ),
             ) {
-                CollectionScreen(setTitle)
+                CollectionScreen(setTitle, showSnackbar) {
+                    navController.navigate(RibbonRoutes.PhotoRoute + "/$it")
+                }
             }
             composable(route = HomeTabs.Profile.route) {
                 val title = stringResource(R.string.profile)
                 LaunchedEffect(Unit) { setTitle(title) }
-                ProfileScreen()
+                ProfileScreen(showSnackbar) {
+                    navController.navigate(RibbonRoutes.PhotoRoute + "/$it")
+                }
             }
         }
     }

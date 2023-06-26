@@ -26,22 +26,20 @@ class AuthViewModel @Inject constructor(
     private val code: String = savedStateHandle["code"]!!
 
     init {
-        getToken()
+        loadToken()
     }
 
-    fun getToken() = viewModelScope.launch {
+    fun loadToken() = viewModelScope.launch {
         uiState = AuthUiState(loading = true)
-        runCatching {
-            api.getAccessToken(TokenBody(code))
-        }.fold(
+        uiState = runCatching { api.getAccessToken(TokenBody(code)) }.fold(
             onSuccess = {
                 credentialsRepository.token = it.accessToken
-                uiState = uiState.copy(userLoggedIn = true)
+                uiState.copy(userLoggedIn = true)
             },
             onFailure = {
-                uiState = uiState.copy(
+                uiState.copy(
                     loading = false,
-                    error = it.message ?: "Error",
+                    error = it.localizedMessage ?: "Error",
                 )
             },
         )

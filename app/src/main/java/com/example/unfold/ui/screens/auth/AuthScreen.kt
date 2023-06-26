@@ -46,7 +46,7 @@ fun AuthScreen(
     LaunchedEffect(uiState.userLoggedIn) {
         if (uiState.userLoggedIn) complete()
     }
-    LaunchedEffect(uiState.error) {
+    LaunchedEffect(uiState) {
         uiState.error?.let { showSnackbar(it) }
     }
 
@@ -91,7 +91,7 @@ fun AuthScreen(
                         )
                     },
                     shape = RoundedCornerShape(6.dp),
-                    onClick = viewModel::getToken,
+                    onClick = viewModel::loadToken,
                 ) {
                     Text(
                         text = stringResource(R.string.retry),
