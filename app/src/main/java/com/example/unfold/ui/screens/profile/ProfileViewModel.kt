@@ -34,7 +34,7 @@ class ProfileViewModel @Inject constructor(
         uiState = uiState.copy(loading = true)
         uiState = runCatching { api.getMe() }.fold(
             onSuccess = {
-                likedPhotosFlow = repository.likedPhotosFlow(it.username).cachedIn(viewModelScope)
+                likedPhotosFlow = repository.likedFlow(it.username).cachedIn(viewModelScope)
                 uiState.copy(loading = false, user = it)
             },
             onFailure = { uiState.copy(loading = false, error = it.localizedMessage ?: "Error") },

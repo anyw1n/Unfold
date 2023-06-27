@@ -23,6 +23,7 @@ import com.example.unfold.ui.screens.onboarding.OnboardingScreen
 import com.example.unfold.ui.screens.photo.PhotoScreen
 import com.example.unfold.ui.screens.profile.ProfileScreen
 import com.example.unfold.ui.screens.ribbon.RibbonScreen
+import com.example.unfold.ui.screens.search.SearchScreen
 import com.example.unfold.util.RedirectUri
 
 object MainDestinations {
@@ -30,6 +31,7 @@ object MainDestinations {
     const val LoginRoute = "login"
     const val AuthRoute = "auth/{code}"
     const val HomeRoute = "home"
+    const val SearchRoute = "search"
 }
 
 @Composable
@@ -58,6 +60,11 @@ fun NavGraph(
         ) {
             AuthScreen(showSnackbar) {
                 navController.navigate(MainDestinations.HomeRoute) { popUpTo(0) }
+            }
+        }
+        composable(route = MainDestinations.SearchRoute) {
+            SearchScreen(showSnackbar) {
+                navController.navigate(RibbonRoutes.PhotoRoute + "/$it")
             }
         }
         navigation(

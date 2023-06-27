@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.core.net.toUri
 import com.example.unfold.data.models.AuthInfo
 import com.example.unfold.data.models.Collection
+import com.example.unfold.data.models.PaginationResponse
 import com.example.unfold.data.models.Photo
 import com.example.unfold.data.models.TokenBody
 import com.example.unfold.data.models.User
@@ -63,6 +64,13 @@ interface Api {
         @Query("page") page: Int,
         @Query("per_page") limit: Int,
     ): List<Photo>
+
+    @GET("search/photos")
+    suspend fun searchPhotos(
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") limit: Int,
+    ): PaginationResponse<Photo>
 
     companion object {
 

@@ -17,7 +17,7 @@ class PhotoRepository @Inject constructor(
     private val photoDao = db.photoDao()
 
     @OptIn(ExperimentalPagingApi::class)
-    val photosFlow = Pager(
+    val flow = Pager(
         config = PagingConfig(pageSize = Api.Limit),
         remoteMediator = photoRemoteMediator,
     ) {
@@ -30,9 +30,15 @@ class PhotoRepository @Inject constructor(
         CollectionPhotosPagingSource(api, collectionId)
     }.flow
 
-    fun likedPhotosFlow(username: String) = Pager(
+    fun likedFlow(username: String) = Pager(
         config = PagingConfig(pageSize = Api.Limit),
     ) {
         LikedPhotosPagingSource(api, username)
+    }.flow
+
+    fun searchFlow(query: String) = Pager(
+        config = PagingConfig(pageSize = Api.Limit),
+    ) {
+        SearchPhotosPagingSource(api, query)
     }.flow
 }

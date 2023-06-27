@@ -1,4 +1,4 @@
-package com.example.unfold.ui.screens.ribbon
+package com.example.unfold.ui.screens.search
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,15 +14,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RibbonViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val api: Api,
-    repository: PhotoRepository,
+    private val repository: PhotoRepository,
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(RibbonUiState())
+    var uiState by mutableStateOf(SearchUiState())
         private set
 
-    val photosFlow = repository.flow.cachedIn(viewModelScope)
+    fun search(query: String?) { uiState = uiState.copy(query = query) }
+
+    fun getPhotos(query: String) = repository.searchFlow(query).cachedIn(viewModelScope)
 
     fun like(photo: Photo, index: Int) = viewModelScope.launch {
         val wasLiked = !photo.likedByUser
@@ -33,8 +35,6 @@ class RibbonViewModel @Inject constructor(
             onFailure = { uiState.copy(error = it.localizedMessage ?: "Error") },
         )
     }
-
-    fun photoLiked() { uiState = uiState.copy(likedPhotoIndex = null) }
 
     fun errorShown() { uiState = uiState.copy(error = null) }
 }

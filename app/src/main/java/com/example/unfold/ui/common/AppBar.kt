@@ -50,13 +50,19 @@ fun AppBar(navController: NavController, title: String, logout: () -> Unit) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
             )
-            if (currentRoute == HomeTabs.Profile.route) {
+            if (currentRoute == HomeTabs.Ribbon.route) {
                 Icon(
+                    painter = painterResource(R.drawable.search),
+                    contentDescription = null,
                     modifier = Modifier
                         .size(18.dp)
-                        .clickable { logout() },
+                        .clickable { navController.navigate(MainDestinations.SearchRoute) },
+                )
+            } else if (currentRoute == HomeTabs.Profile.route) {
+                Icon(
                     painter = painterResource(R.drawable.logout),
                     contentDescription = null,
+                    modifier = Modifier.size(18.dp).clickable { logout() },
                 )
             }
         }
